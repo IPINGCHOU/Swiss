@@ -1,0 +1,30 @@
+{
+  "name": "Swiss",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {
+      "version": "1.7.1"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/zsh",
+        "python.linting.mypyEnabled": true,
+        "python.linting.enabled": true,
+        "python.analysis.typeCheckingMode": "strict",
+        "python.analysis.diagnosticMode": "workspace",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.mypy-type-checker",
+        "ms-python.isort"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
