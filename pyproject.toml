@@ -15,9 +15,16 @@ numpy = "^2.2.0"
 pandas = "^2.2.3"
 streamlit = "^1.41.0"
 poethepoet = "^0.24.0"
+pytest = "^8.3.4"
 
 [tool.poe.tasks.activate]
 cmd = "streamlit run app/main.py"
+
+[tool.poe.tasks.test]
+args = [
+    { name = "filepath", positional = true, help = "Path to test file" }
+]
+cmd = "pytest -vv ${filepath}"
 
 [build-system]
 requires = ["poetry-core"]
