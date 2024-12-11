@@ -16,13 +16,23 @@
         "python.linting.enabled": true,
         "python.analysis.typeCheckingMode": "strict",
         "python.analysis.diagnosticMode": "workspace",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "python.languageServer": "Pylance", // Disable Pylance
+        "python.linting.pylintEnabled": true, // Enable Pylint
+        "python.formatting.provider": "black", // Use Black for formatting
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": true,
+          "source.fixAll": true // Automatically fix linting issues on save
+        }
       },
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-python.mypy-type-checker",
-        "ms-python.isort"
+        "ms-python.isort",
+        "ms-python.pylint",
+        "charliermarsh.ruff",
+        "tamasfe.even-better-toml"
       ]
     }
   },

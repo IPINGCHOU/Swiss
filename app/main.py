@@ -1,5 +1,6 @@
-import streamlit as st
 import logging
+
+import streamlit as st
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
