@@ -32,7 +32,7 @@ repos:
     hooks:
       - id: pylint
         args: []
-        additional_dependencies: [pylint, streamlit, matplotlib]
+        additional_dependencies: [pylint]
         # Add environment variable to use Poetry virtual environment
         env:
           PYTHONPATH: "$(poetry env info --path)/lib/python3.12/site-packages"
