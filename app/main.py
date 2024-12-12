@@ -1,3 +1,5 @@
+"""Main function for the Swiss, runs streamlit app"""
+
 from datetime import date
 
 import streamlit as st

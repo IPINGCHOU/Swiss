@@ -1,2 +1,0 @@
-[MASTER]
-init-hook='import sys; sys.path.append("."); sys.path.append("$(poetry env info --path)/lib/python3.12/site-packages")'

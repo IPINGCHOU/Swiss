@@ -31,14 +31,15 @@ repos:
     rev: v3.0.3
     hooks:
       - id: pylint
-        args: []
-        additional_dependencies: [pylint]
-        # Add environment variable to use Poetry virtual environment
-        env:
-          PYTHONPATH: "$(poetry env info --path)/lib/python3.12/site-packages"
+        name: pylint (app)
+        description: "Run 'pylint' for Python linting"
+        entry: poetry run pylint
+        files: app/
+        language: system
+        # types: [python]
   # mypy
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.9.0
     hooks:
       # Run the mypy.
       - id: mypy
@@ -70,4 +71,3 @@ repos:
             types-PyYAML,
             types-setuptools
           ]
-        minimum_pre_commit_version: "3.7.1"
