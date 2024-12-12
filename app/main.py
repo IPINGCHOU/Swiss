@@ -5,7 +5,11 @@ import streamlit as st
 from app.components.elements import plot_stock_back_test
 
 
-def main():
+def main() -> None:
+    """
+    Main function for the Swiss
+    """
+
     st.title("Stock Backtest Analysis")
 
     # Create input boxes
@@ -29,9 +33,13 @@ def main():
         back_test_res = plot_stock_back_test(
             stock_symbol, start_date, end_date, drop_rate_decimal
         )
-        # Display the plot
-        st.pyplot(back_test_res.fig)
-        st.dataframe(back_test_res.result_df)
+        # Display the plot and dataframe in two columns
+        col1, col2 = st.columns(2)
+        with col1:
+            st.pyplot(back_test_res.fig)
+        with col2:
+            st.dataframe(back_test_res.result_df)
+            print("hi")
 
 
 if __name__ == "__main__":

@@ -7,6 +7,16 @@
       "GIT_USER_NAME": "${localEnv:GIT_USER_NAME}"
     }
   },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2.5.2": {
+      "username": "vscode"
+    },
+  },
+  "postStartCommand": [
+    "/bin/sh",
+    "-c",
+    "poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
+  ],
   "customizations": {
     "vscode": {
       "settings": {
@@ -35,10 +45,6 @@
       ]
     }
   },
-  "postCreateCommand": [
-    "/bin/sh",
-    "-c",
-    "poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
-  ],
-  "remoteUser": "vscode"
+  "containerUser": "vscode",
+  // "remoteUser": "vscode"
 }

@@ -1,14 +1,223 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+  # Ruff
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.6
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-      - id: check-added-large-files
-
-  - repo: https://github.com/PyCQA/pylint
-    rev: v3.0.3
+      # Run the linter.
+      - id: ruff
+        name: ruff
+        description: "Run 'ruff' for extremely fast Python linting"
+        entry: ruff check --force-exclude
+        language: python
+        types_or: [python, pyi]
+        # --fix: enable lint fixes
+        args: [--fix]
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "3.7.1"
+      # Run the formatter.
+      - id: ruff-format
+        name: ruff-format
+        description: "Run 'ruff format' for extremely fast Python formatting"
+        entry: ruff format --force-exclude
+        language: python
+        types_or: [python, pyi]
+        args: []
+        require_serial: true
+        additional_dependencies: []
+        minimum_pre_commit_version: "3.7.1"
+  # mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.10.0
     hooks:
-      - id: pylint
-        additional_dependencies: [pylint]
+      # Run the mypy.
+      - id: mypy
+        name: mypy (cross-platform-api)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/cross-platform-api mypy
+        files: services/cross-platform-api/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+            types-PyYAML,
+            types-setuptools
+          ]
+        minimum_pre_commit_version: "3.7.1"
+      - id: mypy
+        name: mypy (discord)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/discord mypy
+        files: services/discord/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+            types-PyYAML,
+            types-pytz,
+          ]
+        minimum_pre_commit_version: "3.7.1"
+      - id: mypy
+        name: mypy (knowledge-hub)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/knowledge-hub mypy
+        files: services/knowledge-hub/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+            types-toml,
+            types-PyYAML,
+          ]
+        minimum_pre_commit_version: "3.7.1"
+      - id: mypy
+        name: mypy (langserve)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/langserve mypy
+        files: services/langserve/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+            types-PyYAML,
+            types-pytz
+          ]
+        minimum_pre_commit_version: "3.7.1"
+      - id: mypy
+        name: mypy (tectonic)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/tectonic mypy
+        files: services/tectonic/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+          ]
+        minimum_pre_commit_version: "3.7.1"
+      - id: mypy
+        name: mypy (user-hub)
+        description: "Run 'mypy' for Python linting"
+        entry: env MYPYPATH=services/user-hub mypy
+        files: services/user-hub/
+        language: python
+        args:
+          [
+            --ignore-missing-imports,
+            --follow-imports=silent,
+            --show-error-codes,
+            --explicit-package-bases,
+          ]
+        require_serial: true
+        # Add types package list
+        additional_dependencies:
+          [
+            pydantic,
+            pydantic-settings,
+            mypy-boto3-dynamodb,
+            boto3-stubs,
+            pytest,
+            langchain_core,
+            types-requests,
+            streamlit,
+            fastapi,
+            discord,
+            types-aiofiles,
+            types-PyYAML,
+            types-pytz,
+          ]
+        minimum_pre_commit_version: "3.7.1"

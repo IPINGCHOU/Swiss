@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir poetry==1.7.1 && \
     mkdir -p /home/vscode/.local/bin && \
     chown -R vscode:vscode /home/vscode/.local
 
-RUN poetry config virtualenvs.in-project true
+RUN poetry config virtualenvs.in-project false
 
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
