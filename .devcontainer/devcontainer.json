@@ -1,11 +1,10 @@
 {
   "name": "Swiss",
   "build": {
-    "dockerfile": "../Dockerfile"
-  },
-  "features": {
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {
-      "version": "1.7.1"
+    "dockerfile": "../Dockerfile",
+    "args": {
+      "GIT_USER_EMAIL": "${localEnv:GIT_USER_EMAIL}",
+      "GIT_USER_NAME": "${localEnv:GIT_USER_NAME}"
     }
   },
   "customizations": {
@@ -17,12 +16,12 @@
         "python.analysis.typeCheckingMode": "strict",
         "python.analysis.diagnosticMode": "workspace",
         "editor.formatOnSave": true,
-        "python.languageServer": "Pylance", // Disable Pylance
-        "python.linting.pylintEnabled": true, // Enable Pylint
-        "python.formatting.provider": "black", // Use Black for formatting
+        "python.languageServer": "Pylance",
+        "python.linting.pylintEnabled": true,
+        "python.formatting.provider": "black",
         "editor.codeActionsOnSave": {
           "source.organizeImports": true,
-          "source.fixAll": true // Automatically fix linting issues on save
+          "source.fixAll": true
         }
       },
       "extensions": [
@@ -36,5 +35,10 @@
       ]
     }
   },
+  "postCreateCommand": [
+    "/bin/sh",
+    "-c",
+    "poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
+  ],
   "remoteUser": "vscode"
 }

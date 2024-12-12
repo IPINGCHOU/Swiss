@@ -16,13 +16,21 @@ RUN useradd -m -s /bin/zsh vscode
 
 # Install system-wide tools as root
 USER root
-RUN pip install --no-cache-dir poetry==1.7.1 mypy black isort poethepoet
+RUN pip install --no-cache-dir poetry==1.7.1 && \
+    mkdir -p /home/vscode/.local/bin && \
+    chown -R vscode:vscode /home/vscode/.local
+
+RUN poetry config virtualenvs.in-project true
 
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
     rm -rf awscliv2.zip aws
+
+# Add build arguments
+ARG GIT_USER_EMAIL
+ARG GIT_USER_NAME
 
 # Switch to the vscode user
 USER vscode
@@ -38,20 +46,20 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
     echo "ZSH_THEME=\"powerlevel10k/powerlevel10k\"" >> /home/vscode/.zshrc && \
     echo "plugins=(git zsh-autosuggestions zsh-syntax-highlighting)" >> /home/vscode/.zshrc
 
-# Add poetry to PATH
+# Add poetry to PATH and configure
 ENV PATH="/home/vscode/.local/bin:$PATH"
 
-# Configure poetry
-RUN poetry config virtualenvs.in-project true
-
 # Copy project files
-COPY --chown=vscode:vscode pyproject.toml poetry.lock* ./
+COPY --chown=vscode:vscode pyproject.toml ./
 
 # Install dependencies
 RUN poetry install --only main --no-interaction --no-ansi --no-root
 
-# Add poethepoet to the project
-RUN poetry add poethepoet
+# Configure Git globally if credentials are provided
+RUN if [ ! -z "$GIT_USER_EMAIL" ] && [ ! -z "$GIT_USER_NAME" ]; then \
+    git config --global user.email "${GIT_USER_EMAIL}" && \
+    git config --global user.name "${GIT_USER_NAME}"; \
+    fi
 
 # Command to run when the container starts
 CMD ["zsh"]

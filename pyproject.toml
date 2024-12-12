@@ -4,9 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["IPINGCHOU <ipingchou84@gmail.com>"]
 readme = "README.md"
-packages = [
-    { include = "app" }
-]
+packages = [{ include = "app" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -16,15 +14,21 @@ pandas = "^2.2.3"
 streamlit = "^1.41.0"
 poethepoet = "^0.24.0"
 pytest = "^8.3.4"
+pre-commit = "^3.0.0"
+pylint = "^3.0.3"
+yfinance = "^0.2.50"
+pandas-stubs = "^2.2.3.241126"
+pydantic = "^2.10.3"
+
+[tool.pylint]
+disable = ["C0114"]
 
 [tool.poe.tasks.activate]
 cmd = "streamlit run app/main.py"
 
 [tool.poe.tasks.test]
-args = [
-    { name = "filepath", positional = true, help = "Path to test file" }
-]
-cmd = "pytest -vv ${filepath}"
+args = [{ name = "filepath", positional = true, help = "Path to test file" }]
+cmd = "pytest -vv -s ${filepath}"
 
 [build-system]
 requires = ["poetry-core"]
