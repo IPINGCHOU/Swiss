@@ -26,6 +26,16 @@ repos:
         require_serial: true
         additional_dependencies: []
         minimum_pre_commit_version: "3.7.1"
+  # pylint
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.0.3
+    hooks:
+      - id: pylint
+        args: []
+        additional_dependencies: [pylint, streamlit, matplotlib]
+        # Add environment variable to use Poetry virtual environment
+        env:
+          PYTHONPATH: "$(poetry env info --path)/lib/python3.12/site-packages"
   # mypy
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.10.0
@@ -53,11 +63,9 @@ repos:
             mypy-boto3-dynamodb,
             boto3-stubs,
             pytest,
-            langchain_core,
             types-requests,
             streamlit,
             fastapi,
-            discord,
             types-aiofiles,
             types-PyYAML,
             types-setuptools

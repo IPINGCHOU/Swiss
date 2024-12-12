@@ -9,6 +9,18 @@ from app.utils.fetch_stock import fetch_stock_history
 
 
 def plot_stock_back_test(stock_symbol, start_date, end_date, drops):
+    """
+    Plots the stock backtest results.
+
+    Args:
+        stock_symbol (str): The stock symbol to backtest.
+        start_date (datetime.date): The start date for the backtest.
+        end_date (datetime.date): The end date for the backtest.
+        drop_rate (float): The drop rate for the backtest.
+
+    Returns:
+        BackTestResult: The result of the backtest containing the figure and dataframe.
+    """
     # Fetch the historical stock data
     history_data = fetch_stock_history(stock_symbol, start_date, end_date)
 
