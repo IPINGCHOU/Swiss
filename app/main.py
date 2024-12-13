@@ -41,7 +41,6 @@ def main() -> None:
             st.pyplot(back_test_res.fig)
         with col2:
             st.dataframe(back_test_res.result_df)
-            print("hi")
 
 
 if __name__ == "__main__":

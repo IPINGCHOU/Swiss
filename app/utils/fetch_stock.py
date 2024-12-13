@@ -19,7 +19,7 @@ def fetch_stock_history(
         end_date (str): End date in 'YYYY-MM-DD' format (optional, defaults to today)
 
     Returns:
-        dict: Dictionary containing historical data with dates as keys
+        pd.DataFrame: Historical stock data
     """
     try:
         # If end_date is not provided, use today's date
