@@ -4,7 +4,7 @@ from google.cloud import firestore
 
 def save_stock_history_to_firebase(
     db: firestore.Client, stock_code: str, df: pd.DataFrame
-) -> None:
+) -> bool:
     """
     Save DataFrame to Firebase Firestore.
 
@@ -34,3 +34,5 @@ def save_stock_history_to_firebase(
         row_dict = row.to_dict()
         row_dict["Date"] = index
         doc_ref.set(row_dict)
+
+    return True

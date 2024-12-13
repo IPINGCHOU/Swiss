@@ -182,3 +182,6 @@ ENV/
 
 # Local development
 .DS_Store
+
+# credentials
+fire_base_creds.json
