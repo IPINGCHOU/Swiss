@@ -14,6 +14,4 @@ def test_fetch_stock(symbol, start_d, end_d):
     """
     result = fetch_stock.fetch_stock_history(symbol, start_d, end_d)
 
-    print(result)
-    print("hi")
     assert result is not None
