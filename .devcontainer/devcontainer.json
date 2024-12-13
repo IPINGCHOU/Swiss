@@ -10,7 +10,7 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2.5.2": {
       "username": "vscode"
-    },
+    }
   },
   "postStartCommand": [
     "/bin/sh",
@@ -45,6 +45,5 @@
       ]
     }
   },
-  "containerUser": "vscode",
-  // "remoteUser": "vscode"
+  "containerUser": "vscode"
 }
