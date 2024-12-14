@@ -30,6 +30,13 @@ cmd = "streamlit run app/main.py"
 [tool.poe.tasks.test]
 args = [{ name = "filepath", positional = true, help = "Path to test file" }]
 cmd = "pytest -vv -s tests/${filepath}"
+[tool.poe.tasks.test_single]
+args = [
+    { name = "filepath", positional = true, help = "Path to test file" },
+    { name = "testname", positional = true, help = "Name of the test to run" },
+]
+cmd = "pytest -vv -s -k ${testname} tests/${filepath}"
+
 
 [build-system]
 requires = ["poetry-core"]

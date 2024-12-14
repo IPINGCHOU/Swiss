@@ -25,3 +25,17 @@ def test_fetch_and_save_stock_history():
     assert stock_df is not None
     assert len(stock_df) > 0
     assert result is True
+
+
+def test_fetch_stock_history():
+    """
+    Test if the fetch_stock_history function works correctly.
+    """
+
+    symbol = "AAPL"
+    start_date = "2024-12-01"
+    end_date = "2024-12-12"
+    stock_df = firebase_manager.fetch_stock_history(symbol, start_date, end_date)
+    assert stock_df is not None
+
+    print(stock_df)

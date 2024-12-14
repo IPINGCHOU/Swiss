@@ -1,9 +1,11 @@
 """Module to interact with Firebase Firestore."""
 
 import os
+from datetime import datetime
 
 import pandas as pd
 from firebase_admin import credentials, firestore, initialize_app
+from google.cloud.firestore import FieldFilter
 
 
 class FirebaseDatabaseManager:
@@ -48,9 +50,36 @@ class FirebaseDatabaseManager:
 
         return True
 
-    def fetch_stock_history(self) -> bool:
-        """todo"""
-        return True
+    def fetch_stock_history(
+        self, stock_code: str, start_date: str, end_date: str
+    ) -> pd.DataFrame:
+        """
+        Fetch stock history from Firebase Firestore within a date range.
+
+        Args:
+            stock_code (str): Stock ticker symbol
+            start_date (str): Start date in 'YYYY-MM-DD' format
+            end_date (str): End date in 'YYYY-MM-DD' format
+
+        Returns:
+            pd.DataFrame: DataFrame containing the stock history
+        """
+        collection_ref = (
+            self.db.collection("stock_data").document(stock_code).collection("history")
+        )
+        # Convert date strings to datetime objects
+        start_ds = datetime.strptime(start_date, "%Y-%m-%d")
+        end_ds = datetime.strptime(end_date, "%Y-%m-%d")
+
+        query = collection_ref.where(filter=FieldFilter("Date", ">=", start_ds)).where(
+            filter=FieldFilter("Date", "<=", end_ds)
+        )
+        docs = query.stream()
+        data = []
+        for doc in docs:
+            data.append(doc.to_dict())
+
+        return pd.DataFrame(data)
 
 
 # Create a global instance of FirebaseManager
