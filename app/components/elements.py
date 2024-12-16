@@ -1,14 +1,18 @@
 """Define the elements of the app."""
 
+from datetime import datetime
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
 from app.schemas.strats import BackTestComponents
 from app.strats.moving_window import back_testing
-from app.utils.fetch_stock import fetch_stock_history
+from app.utils.firebase_helper.stock_db import firebase_stock_database
 
 
-def plot_stock_back_test(stock_symbol, start_date, end_date, drops):
+def plot_stock_back_test(
+    stock_symbol: str, start_date: datetime, end_date: datetime, drops: float
+):
     """
     Plots the stock backtest results.
 
@@ -22,7 +26,9 @@ def plot_stock_back_test(stock_symbol, start_date, end_date, drops):
         BackTestResult: The result of the backtest containing the figure and dataframe.
     """
     # Fetch the historical stock data
-    history_data = fetch_stock_history(stock_symbol, start_date, end_date)
+    history_data = firebase_stock_database.fetch_stock_history(
+        stock_symbol, start_date, end_date
+    )
 
     # Extract all "close" elements from the history data
     close_prices = history_data["Close"].tolist()

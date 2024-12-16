@@ -7,7 +7,7 @@ import pandas as pd
 import yfinance as yf  # type: ignore
 
 
-def fetch_stock_history(
+def fetch_stock_from_yfinance(
     stock_code: str, start_date: str, end_date: Optional[str] = None
 ) -> pd.DataFrame:
     """
@@ -24,14 +24,18 @@ def fetch_stock_history(
     try:
         # If end_date is not provided, use today's date
         if end_date is None:
-            end_date = datetime.now().strftime("%Y-%m-%d")
-
+            input_end_date = datetime.now().strftime("%Y-%m-%d")
+        else:
+            input_end_date = end_date
         # Create ticker object
         ticker = yf.Ticker(stock_code)
 
         # Fetch historical data
         hist = ticker.history(
-            start=start_date, end=end_date, interval="1d", auto_adjust=True
+            start=start_date,
+            end=input_end_date,
+            interval="1d",
+            auto_adjust=True,
         )
 
         return hist

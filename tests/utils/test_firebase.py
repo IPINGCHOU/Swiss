@@ -1,9 +1,7 @@
 """Tests for the utils.firebase_helper module."""
 
-from datetime import datetime, timedelta
-
-from app.utils.fetch_stock import fetch_stock_history
-from app.utils.firebase_helper.database import firebase_manager
+from app.utils.fetch_stock import fetch_stock_from_yfinance
+from app.utils.firebase_helper.stock_db import firebase_stock_database
 
 
 def test_fetch_and_save_stock_history():
@@ -12,14 +10,14 @@ def test_fetch_and_save_stock_history():
     """
     # Prepare test data
     symbol = "AAPL"
-    end_date = datetime.now().strftime("%Y-%m-%d")
-    start_date = (datetime.now() - timedelta(days=20)).strftime("%Y-%m-%d")
+    start_date = "2024-12-01"
+    end_date = "2024-12-11"
 
     # Fetch stock history
-    stock_df = fetch_stock_history(symbol, start_date, end_date)
+    stock_df = fetch_stock_from_yfinance(symbol, start_date, end_date)
 
     # Save to Firebase
-    result = firebase_manager.save_stock_history_to_firebase(symbol, stock_df)
+    result = firebase_stock_database.save_stock_history_to_firebase(symbol, stock_df)
 
     # Assertions
     assert stock_df is not None
@@ -34,8 +32,6 @@ def test_fetch_stock_history():
 
     symbol = "AAPL"
     start_date = "2024-12-01"
-    end_date = "2024-12-12"
-    stock_df = firebase_manager.fetch_stock_history(symbol, start_date, end_date)
+    end_date = "2024-12-11"
+    stock_df = firebase_stock_database.fetch_stock_history(symbol, start_date, end_date)
     assert stock_df is not None
-
-    print(stock_df)

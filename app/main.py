@@ -1,6 +1,6 @@
 """Main function for the Swiss, runs streamlit app"""
 
-from datetime import date
+from datetime import datetime
 
 import streamlit as st
 
@@ -19,9 +19,19 @@ def main() -> None:
 
     col1, col2 = st.columns(2)
     with col1:
-        start_date = st.date_input("Start Date", date(2020, 1, 1))
+        start_date = datetime.combine(
+            st.date_input("Start Date", datetime(2024, 11, 1)),  # type: ignore
+            datetime.min.time(),
+        )
     with col2:
-        end_date = st.date_input("End Date", date.today())
+        end_date = datetime.combine(
+            st.date_input("End Date", datetime.today().date()),  # type: ignore
+            datetime.min.time(),
+        )
+
+    # # Convert to datetime
+    # start_date = datetime.combine(start_date, datetime.min.time())
+    # end_date = datetime.combine(end_date, datetime.min.time())
 
     drop_rate = st.number_input(
         "Drop Rate (%)", min_value=0.0, max_value=100.0, value=10.0, step=0.1
