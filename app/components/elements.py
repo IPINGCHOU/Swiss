@@ -32,7 +32,7 @@ def plot_stock_back_test(
 
     # Extract all "close" elements from the history data
     close_prices = history_data["Close"].tolist()
-    all_dates = history_data.index.tolist()
+    all_dates = history_data["Date"].tolist()
 
     # Pass the close prices to the back_testing function
     intervals = back_testing(close_prices, drops)
@@ -42,7 +42,7 @@ def plot_stock_back_test(
     ax.plot(all_dates, close_prices, label="Back Test Intervals")
     ax.set_xlabel("Date")
     ax.set_ylabel("Intervals")
-    ax.set_title(f"Stock Back Test for {stock_symbol}")
+    ax.set_title(f"Stock Back Test for {stock_symbol} with {drops*100:.2f}% Drops")
     ax.legend()
     ax.grid(True)
 

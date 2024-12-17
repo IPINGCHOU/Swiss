@@ -4,7 +4,7 @@ from datetime import datetime
 
 import pytest
 
-from app.utils import fetch_stock
+from app.utils.external_data_helper import fetch_stock
 
 
 @pytest.mark.parametrize(

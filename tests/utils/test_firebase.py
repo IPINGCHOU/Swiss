@@ -1,6 +1,9 @@
 """Tests for the utils.firebase_helper module."""
 
-from app.utils.fetch_stock import fetch_stock_from_yfinance
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+from app.utils.external_data_helper.fetch_stock import fetch_stock_from_yfinance
 from app.utils.firebase_helper.stock_db import firebase_stock_database
 
 
@@ -10,8 +13,8 @@ def test_fetch_and_save_stock_history():
     """
     # Prepare test data
     symbol = "AAPL"
-    start_date = "2024-12-01"
-    end_date = "2024-12-11"
+    start_date = datetime(2024, 12, 1, tzinfo=ZoneInfo("Asia/Tokyo"))
+    end_date = datetime(2024, 12, 11, tzinfo=ZoneInfo("Asia/Tokyo"))
 
     # Fetch stock history
     stock_df = fetch_stock_from_yfinance(symbol, start_date, end_date)
@@ -31,7 +34,7 @@ def test_fetch_stock_history():
     """
 
     symbol = "AAPL"
-    start_date = "2024-12-01"
-    end_date = "2024-12-11"
+    start_date = datetime(2024, 12, 1, tzinfo=ZoneInfo("Asia/Tokyo"))
+    end_date = datetime(2024, 12, 11, tzinfo=ZoneInfo("Asia/Tokyo"))
     stock_df = firebase_stock_database.fetch_stock_history(symbol, start_date, end_date)
     assert stock_df is not None
