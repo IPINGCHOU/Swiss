@@ -30,6 +30,7 @@ cmd = "streamlit run app/main.py"
 [tool.poe.tasks.test]
 args = [{ name = "filepath", positional = true, help = "Path to test file" }]
 cmd = "pytest -vv -s tests/${filepath}"
+
 [tool.poe.tasks.test_single]
 args = [
     { name = "filepath", positional = true, help = "Path to test file" },
