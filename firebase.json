@@ -1,0 +1,21 @@
+{
+    "hosting": {
+        "site": "swiss",
+        "public": "./app",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "appAssociation": "AUTO",
+        "rewrites": [
+            {
+                "source": "**",
+                "run": {
+                    "serviceId": "firebase-adminsdk-tmusz@swiss-4e9bd.iam.gserviceaccount.com",
+                    "region": "asia-east1"
+                }
+            }
+        ]
+    }
+}
