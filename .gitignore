@@ -46,3 +46,6 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+# credentials
+fire_base_creds.json
