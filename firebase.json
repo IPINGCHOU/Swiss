@@ -1,25 +1,11 @@
 {
-  "hosting": {
-    "site": "swiss",
-    "public": "./app",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "appAssociation": "AUTO",
-    "rewrites": [
-      {
-        "source": "**",
-        "run": {
-          "serviceId": "firebase-adminsdk-tmusz@swiss-4e9bd.iam.gserviceaccount.com",
-          "region": "asia-east1"
-        }
-      }
-    ]
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  }
+    "hosting": {
+        "public": "public",
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": ""
+            }
+        ]
+    }
 }
