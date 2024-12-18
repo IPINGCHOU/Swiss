@@ -7,7 +7,8 @@ WORKDIR /app
 # Install basic dependencies
 RUN apt-get update && apt-get install -y \
     git \
-    curl
+    curl \
+    socat
 
 # Install and configure poetry
 RUN pip install --no-cache-dir poetry==1.7.1
