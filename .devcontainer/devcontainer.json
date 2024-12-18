@@ -13,7 +13,7 @@
     }
   },
   "postStartCommand": [
-    "/bin/sh",
+    "/bin/zsh",
     "-c",
     "poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
   ],

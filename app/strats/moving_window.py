@@ -26,16 +26,20 @@ def back_testing(
     threshold = values[left] * multiplier
 
     while right < len(values):
-        if values[right] <= threshold:
-            # Found a value that differs by the specified percentage or more
-            intervals.append((left, right, float(values[left]), float(values[right])))
-            left = right  # Move left pointer to current position
-            threshold = values[left] * multiplier  # Update threshold
-        elif values[right] > values[left]:
-            # Update threshold
-            left = right
-            threshold = values[left] * multiplier
+        if values[right] >= values[right - 1]:
+            # moving upward
+            if values[right - 1] <= threshold:
+                # Found a value that differs by the specified percentage or more
+                intervals.append(
+                    (left, right - 1, float(values[left]), float(values[right - 1]))
+                )
+                left = right  # Move left pointer to current position
+                threshold = values[left] * multiplier  # Update threshold
 
+            if values[right] > values[left]:
+                # Update threshold
+                left = right
+                threshold = values[left] * multiplier
         right += 1
 
     return intervals

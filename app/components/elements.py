@@ -55,6 +55,7 @@ def plot_stock_back_test(
                 "Low Date": all_dates[right].strftime("%Y-%m-%d"),
                 "High Value": top_v,
                 "Low Value": bottom_v,
+                "Drop Rate": f"{round((1-(bottom_v / top_v))*100, 2)} %",
             }
         )
 
