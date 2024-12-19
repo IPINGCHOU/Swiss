@@ -45,3 +45,6 @@ docker-compose.yml
 # Ignore Git related files
 .git
 .gitignore
+
+# secrets
+firebase_credentials.json

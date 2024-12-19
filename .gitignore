@@ -48,4 +48,4 @@ Thumbs.db
 .runtimeconfig.json
 
 # credentials
-fire_base_creds.json
+firebase_credentials.json
