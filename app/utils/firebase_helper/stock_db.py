@@ -1,5 +1,6 @@
 """Module to interact with Firebase Firestore."""
 
+import json
 import os
 from datetime import datetime
 from typing import Tuple
@@ -187,7 +188,10 @@ class FirebaseStockDatabaseManager:
 # Create a global instance of FirebaseManager
 # Get the path from an environment variable
 cred_path = os.getenv("FIREBASE_CREDENTIALS")
-cred = credentials.Certificate(cred_path)
+if cred_path is None:
+    raise ValueError("FIREBASE_CREDENTIALS environment variable is not set")
+cred_dict = json.loads(cred_path)
+cred = credentials.Certificate(cred_dict)
 initialize_app(cred)
 firebase_db = firestore.client()
 firebase_stock_database = FirebaseStockDatabaseManager(firebase_db)

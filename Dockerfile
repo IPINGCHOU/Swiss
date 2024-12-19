@@ -20,7 +20,5 @@ COPY . .
 RUN poetry install --only main --no-interaction --no-ansi
 
 EXPOSE 8080
-
-
 # Command to run streamlit directly on port 80
 CMD ["poetry", "run", "streamlit", "run", "app/main.py", "--server.port", "8080"]
