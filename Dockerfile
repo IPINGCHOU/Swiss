@@ -1,14 +1,13 @@
 # Use the official Python image from the Docker Hub
-FROM python:3.12
-
+FROM  python:3.12.8-slim
 # Set the working directory
 WORKDIR /app
 
-# Install basic dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
-    socat
+    unzip
 
 # Install and configure poetry
 RUN pip install --no-cache-dir poetry==1.7.1
@@ -22,6 +21,8 @@ RUN poetry install --only main --no-interaction --no-ansi
 
 # Expose port 80
 EXPOSE 80
+EXPOSE 8080
+
 
 # Command to run streamlit directly on port 80
-CMD ["poetry", "run", "streamlit", "run", "app/main.py", "--server.port", "80"]
+CMD ["poetry", "run", "streamlit", "run", "app/main.py", "--server.port", "8080"]

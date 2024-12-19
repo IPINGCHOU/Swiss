@@ -10,17 +10,19 @@
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2.5.2": {
       "username": "vscode"
-    }
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/dhoeric/features/google-cloud-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "postStartCommand": [
-    "/bin/zsh",
+    "/bin/sh",
     "-c",
-    "poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
+    "git --version && poetry config virtualenvs.in-project true && poetry install && git init && git config --global user.email \"${GIT_USER_EMAIL}\" && git config --global user.name \"${GIT_USER_NAME}\" && poetry run pre-commit install --install-hooks"
   ],
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.shell.linux": "/bin/zsh",
         "python.linting.mypyEnabled": true,
         "python.linting.enabled": true,
         "python.analysis.typeCheckingMode": "strict",
