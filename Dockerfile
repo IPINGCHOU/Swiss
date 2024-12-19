@@ -19,8 +19,6 @@ COPY . .
 # Install dependencies
 RUN poetry install --only main --no-interaction --no-ansi
 
-# Expose port 80
-EXPOSE 80
 EXPOSE 8080
 
 
